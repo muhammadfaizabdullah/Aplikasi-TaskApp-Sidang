@@ -1,0 +1,505 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+}
+
+.form {
+  border-top: 1px solid #e5e7eb;
+}
+
+.sectionSpacing {
+  /* Space between sections */
+}
+
+.section {
+  /* Section container */
+}
+
+.sectionText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.noMembersText {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.membersList {
+  /* List of members */
+}
+
+.memberInfo {
+  flex: 1;
+}
+
+.selectedUsersTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.selectedUsersList {
+  /* List of selected users */
+}
+
+.selectedUserDetails {
+  flex: 1;
+}
+
+.selectedUserActions {
+  display: flex;
+  align-items: center;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.navbarContent {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .navbarContent {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbarContent {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.navbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.navbarItems {
+  display: flex;
+  align-items: center;
+  space-x: 1rem;
+}
+
+@media (min-width: 640px) {
+  .navbarItems {
+    space-x: 1rem;
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  color: #4b5563;
+  transition: color 200ms ease;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.backButton:hover {
+  color: #111827;
+  background-color: #f3f4f6;
+}
+
+.projectTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+@media (min-width: 640px) {
+  .projectTitle {
+    font-size: 2.25rem;
+  }
+}
+
+.projectSubtitle {
+  color: #4b5563;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .projectSubtitle {
+    font-size: 1rem;
+  }
+}
+
+.mainContent {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .mainContent {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainContent {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.formContainer {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.formContent {
+  padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .formContent {
+    padding: 2rem;
+  }
+}
+
+.errorContainer {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+}
+
+.errorText {
+  font-size: 0.875rem;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+}
+
+.sectionContainer {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+}
+
+@media (min-width: 640px) {
+  .sectionContainer {
+    padding: 1rem;
+  }
+}
+
+.memberItem {
+  display: flex;
+  align-items: center;
+  space-x: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.memberItem:hover {
+  background-color: #f3f4f6;
+}
+
+.memberName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.memberRole {
+  font-size: 0.75rem;
+  color: #4b5563;
+}
+
+.selectedUserContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #eff6ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 0.75rem;
+}
+
+.selectedUserInfo {
+  display: flex;
+  align-items: center;
+  space-x: 0.75rem;
+}
+
+.selectedUserName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.selectedUserUsername {
+  font-size: 0.75rem;
+  color: #4b5563;
+}
+
+.alreadyMemberBadge {
+  font-size: 0.75rem;
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.actionButtonsContainer {
+  background-color: #f9fafb;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .actionButtonsContainer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  space-x: 1rem;
+}
+
+.cancelButton {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #eab308;
+  color: #ffffff;
+  border: 1px solid #eab308;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: all 200ms ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 640px) {
+  .cancelButton {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+.cancelButton:hover {
+  background-color: #ca8a04;
+  border-color: #ca8a04;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.submitButton {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: all 200ms ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.submitButton:disabled {
+  background-color: #60a5fa;
+  cursor: not-allowed;
+}
+
+@media (min-width: 640px) {
+  .submitButton {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #ffffff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingContainer {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingContent {
+  text-align: center;
+}
+
+.spinnerLarge {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid #16a34a;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+
+.notFoundContainer {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notFoundContent {
+  max-width: 28rem;
+  width: 100%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.notFoundCard {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 2rem;
+  text-align: center;
+}
+
+.notFoundIconContainer {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 9999px;
+  background-color: #fee2e2;
+  margin-bottom: 1.5rem;
+}
+
+.notFoundTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.notFoundDescription {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.notFoundButton {
+  width: 100%;
+  background-color: #16a34a;
+  color: #ffffff;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+}
+
+.notFoundButton:hover {
+  background-color: #15803d;
+}
+
+.navbarDivider {
+  border-left: 1px solid #d1d5db;
+  padding-left: 1rem;
+}
+
+.avatar {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.avatar:hover {
+  opacity: 0.8;
+}
+
+.removeButton {
+  color: #dc2626;
+  background-color: transparent;
+  border: 1px solid #dc2626;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.removeButton:hover {
+  color: #b91c1c;
+  background-color: #fef2f2;
+}

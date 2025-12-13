@@ -1,0 +1,243 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  username      String?   @unique // Username untuk pencarian (opsional)
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?   // Field untuk avatar/profile picture
+  role          String    @default("MEMBER") // FOUNDER, ADMIN, MEMBER
+  isSuspended   Boolean   @default(false)
+  suspendedUntil DateTime?
+  suspendedReason String?
+  bannedAt      DateTime?
+  bannedReason  String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts Account[]
+  sessions Session[]
+  
+  // Project memberships
+  projectMemberships ProjectMember[]
+  
+  // Tasks assigned
+  assignedTasks TaskAssignee[]
+  
+  // Tasks created
+  createdTasks Task[] @relation("TaskCreator")
+  
+  // Projects created (as founder)
+  foundedProjects Project[] @relation("ProjectFounder")
+  
+  // Task invitations received
+  receivedInvitations TaskInvitation[] @relation("InvitedUser")
+  
+  // Task invitations sent
+  sentInvitations TaskInvitation[] @relation("InvitedBy")
+  
+  // Project history changes
+  projectHistory ProjectHistory[]
+
+  // Task history changes
+  taskHistory TaskHistory[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Project model
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  status      String   @default("ACTIVE") // ACTIVE, COMPLETED, ON_HOLD, PLANNING
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Founder (user yang buat project)
+  founderId   String
+  founder     User     @relation("ProjectFounder", fields: [founderId], references: [id])
+  
+  // Members
+  members ProjectMember[]
+  
+  // Tasks
+  tasks Task[]
+  
+  // Task invitations
+  taskInvitations TaskInvitation[]
+  
+  // Project history for undo/redo
+  history ProjectHistory[]
+}
+
+// Project membership dengan role
+model ProjectMember {
+  id        String   @id @default(cuid())
+  userId    String
+  projectId String
+  role      String   @default("MEMBER") // FOUNDER, ADMIN, MEMBER
+  joinedAt  DateTime @default(now())
+  
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, projectId])
+}
+
+// Task model
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      String   @default("TODO") // TODO, IN_PROGRESS, REVIEW, COMPLETED
+  priority    String   @default("MEDIUM") // LOW, MEDIUM, HIGH
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Project
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  // Multiple assignees (many-to-many relationship)
+  assignees TaskAssignee[]
+
+  // Created by (user yang buat task)
+  createdById String
+  createdBy   User   @relation("TaskCreator", fields: [createdById], references: [id])
+
+  // Task history for undo/redo
+  history TaskHistory[]
+
+}
+
+// Task assignee model (many-to-many relationship)
+model TaskAssignee {
+  id        String   @id @default(cuid())
+  taskId    String
+  userId    String
+  assignedAt DateTime @default(now())
+  
+  // Relations
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@unique([taskId, userId])
+}
+
+// Task invitation model
+model TaskInvitation {
+  id                String    @id @default(cuid())
+  projectId         String
+  invitedUserId     String
+  invitedByUserId   String
+  taskTitle         String
+  taskDescription   String?
+  dueDate           DateTime?
+  status            String    @default("PENDING") // PENDING, ACCEPTED, REJECTED
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  // Relations
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  invitedUser User    @relation("InvitedUser", fields: [invitedUserId], references: [id], onDelete: Cascade)
+  invitedBy   User    @relation("InvitedBy", fields: [invitedByUserId], references: [id], onDelete: Cascade)
+  
+  @@unique([projectId, invitedUserId])
+}
+
+
+// Admin model for separate admin login (username/password)
+model Admin {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // bcrypt hashed password
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Project history model for undo/redo functionality
+model ProjectHistory {
+  id          String   @id @default(cuid())
+  projectId   String
+  action      String   // "STATUS_CHANGE", "NAME_CHANGE", "DESCRIPTION_CHANGE"
+  oldValue    String?  // Previous value
+  newValue    String?  // New value
+  changedBy   String   // User ID who made the change
+  changedAt   DateTime @default(now())
+  isUndone    Boolean  @default(false) // Track if this change has been undone
+
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [changedBy], references: [id], onDelete: Cascade)
+
+  @@index([projectId, changedAt])
+}
+
+// Task history model for undo/redo functionality
+model TaskHistory {
+  id          String   @id @default(cuid())
+  taskId      String
+  action      String   // "STATUS_CHANGE", "TITLE_CHANGE", "DESCRIPTION_CHANGE", "PRIORITY_CHANGE"
+  oldValue    String?  // Previous value
+  newValue    String?  // New value
+  changedBy   String   // User ID who made the change
+  changedAt   DateTime @default(now())
+  isUndone    Boolean  @default(false) // Track if this change has been undone
+
+  // Relations
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [changedBy], references: [id], onDelete: Cascade)
+
+  @@index([taskId, changedAt])
+}
