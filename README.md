@@ -159,7 +159,7 @@ npm run dev
 - Set environment variables
 - Run build: `npm run build && npm start`
 
-## 🤝 Contributing
+## 🤝 Contributingg
 
 1. Fork the repository
 2. Create a feature branch
